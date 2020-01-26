@@ -4,6 +4,7 @@ var $saveNoteBtn = $(".save-note");
 var $newNoteBtn = $(".new-note");
 var $noteList = $(".list-container .list-group");
 
+var jQuery = require("jquery");
 var express = require("express");
 var app = express();
 var PORT = 3000;
