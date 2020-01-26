@@ -11,6 +11,13 @@ var PORT = 3000;
 app.use(express.urlencoded({ extended:true }));
 app.use(express.json());
 app.use(express.static('public'));
+// Routes
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+app.get("/note", function (req, res) {
+  res.sendFile(path.join(__dirname, "notes.html"));
+});
 
 // activeNote is used to keep track of the note in the textarea
 var activeNote = {};
