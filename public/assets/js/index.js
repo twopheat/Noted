@@ -10,9 +10,28 @@ var express = require("express");
 var app = express();
 var PORT = 3000;
 
+//- Setup Express app
 app.use(express.urlencoded({ extended:true }));
 app.use(express.json());
 app.use(express.static('public'));
+// jqueryfix
+var $;
+
+require("jsdom").env("", function(err, window) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+
+    $ = require("jquery")(window);
+
+    doSomething();
+});
+
+function doSomething() {
+    var deferred = $.Deferred();
+}
+
 // Routes
 app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "/public/index.html"));
