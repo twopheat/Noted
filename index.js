@@ -1,45 +1,37 @@
-var $noteTitle = $(".note-title");
+var notesHTML = require("./public/notes.html")
+var jquery = require("jquery");
+var express = require("express");
+
+var $noteTitle = $("#note-title");
 var $noteText = $(".note-textarea");
 var $saveNoteBtn = $(".save-note");
 var $newNoteBtn = $(".new-note");
 var $noteList = $(".list-container .list-group");
 
-var indexHTML = require("/public/notes.html")
-var jQuery = require("jquery");
-var express = require("express");
+
 var app = express();
-var PORT = 3000;
+//var PORT = 3000;
 
 //- Setup Express app
 app.use(express.urlencoded({ extended:true }));
 app.use(express.json());
 app.use(express.static('public'));
-// jqueryfix
-var $;
 
-require("jsdom").env("", function(err, window) {
-    if (err) {
-        console.error(err);
-        return;
-    }
 
-    $ = require("jquery")(window);
-
-    doSomething();
-});
-
-function doSomething() {
+function fixJQ() {
     var deferred = $.Deferred();
 }
 
 // Routes
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
+  res.sendFile(path.join(__dirname, "../index.html"));
 });
 app.get("/note", function (req, res) {
-  res.sendFile(path.join(__dirname, "/public/notes.html"));
+  res.sendFile(path.join(__dirname, "../notes.html"));
 });
-
+app.get('/users/:userId/notes/:noteId', function (req, res) {
+  res.send(req.params)
+});
 // activeNote is used to keep track of the note in the textarea
 var activeNote = {};
 
@@ -63,7 +55,7 @@ var saveNote = function(note) {
 // A function for deleting a note from the db
 var deleteNote = function(id) {
   return $.ajax({
-    url: "api/notes/" + id,
+    url: "/api/notes/" + id,
     method: "DELETE"
   });
 };
@@ -89,7 +81,8 @@ var renderActiveNote = function() {
 var handleNoteSave = function() {
   var newNote = {
     title: $noteTitle.val(),
-    text: $noteText.val()
+    text: $noteText.val(),
+    id: $
   };
 
   saveNote(newNote).then(function(data) {
