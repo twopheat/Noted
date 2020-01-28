@@ -1,5 +1,6 @@
 
-var jquery = require("jquery");
+var jsdom = require('jsdom');
+$ = require('jquery')(new jsdom.JSDOM().window);
 var express = require("express");
 
 
@@ -18,8 +19,11 @@ var app = express();
 //- Setup Express app
 app.use(express.urlencoded({ extended:true }));
 app.use(express.json());
+
 //app.use(express.static('public'));
 app.use(express.static(__dirname + '/public'));
+
+
 //function buildLaunch() {
   var http = require("http");
 
@@ -33,7 +37,45 @@ app.use(express.static(__dirname + '/public'));
     console.log("Visit http://localhost:" + PORT);
   });
 
+  function handleRequest(req, res) {
+
+    // Capture the url the request is made to
+    var path = req.url;
   
+    // Depending on the URL, display a different HTML file.
+    switch (path) {
+  
+    case "/":
+      return displayRoot(res);
+  
+    case "/note":
+      return displaynote(res);
+  
+    default:
+      return display404(path, res);
+    }
+  }
+  
+  function displaynote(res) {
+    var myHTML = ""; +
+      "<body><h1>My Team</h1>" +
+      "<div class='container'>" +
+      "<div class='card'>" +
+      "<div class='card-title'>" +
+      "<div class='row'>" +
+      "<div class='col'>" +
+      "<h5>" + res1.name + "</h5>" +
+      "</div></div></div></div></div>" +
+      //"<a href='/'>Go Home</a>" +
+      "</body></html>";
+  
+    // Configure the response to return a status code of 200 (meaning everything went OK), and to be an HTML document
+    res.writeHead(200, { "Content-Type": "text/html" });
+  
+    // End the response by sending the client the myHTML string (which gets rendered as an HTML document thanks to the code above)
+    res.end(myHTML);
+  }
+
 function fixJQ() {
     var deferred = $.Deferred();
 }
