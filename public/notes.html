@@ -7,15 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>nOted</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/flatly/bootstrap.min.css" />
+  <script type="type/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
     crossorigin="anonymous">
-  <link rel="stylesheet" href="/assets/css/styles.css">
+    
+  
 </head>
 
-<body>
-  <nav class="navbar navbar-dark bg-primary">
-    <a class="navbar-brand" href="/">nOted</a>
+<body class="bg-dark">
+  <nav class="navbar navbar-dark text-light bg-secondary shadow-sm">
+    <a class="navbar-brand" href="index.html">n<b>O</b>ted</a>
     <div class="icons">
       <i class="fas fa-save text-light save-note"></i>
       <i class="fas fa-pen text-light new-note"></i>
@@ -24,21 +27,23 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-4 list-container">
-        <div class="card rounded mt-3 btn shadow-sm">
-          <ul class="list-group">Sample nOte
+        <div class="card bg-dark col-10 pl-4">
+          <ul style="width:90%;" class="list-group rounded mt-3 btn bg-light shadow-sm">Sample nOte
           </ul>
         </div>
       </div>
       <div class="col-8">
         <br>
-        <input id="note-title" class="note-title rounded" placeholder="Note Title" maxlength="28" type="text">
+        <input id="note-title" class="note-title rounded" style="width:95%;" placeholder="nOte Title" maxlength="28" type="text">
         <br><br>
-        <textarea style="width:90%;height:320px;" class="note-textarea rounded shadow-sm" placeholder="Note Text"></textarea>
+        <textarea style="width:95%;height:320px;" class="note-textarea rounded shadow-sm" placeholder="nOte Text"></textarea>
       </div>
     </div>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="/assets/js/index.js"></script>
 </body>
-
+<footer>
+  <link rel="stylesheet" href="./assets/css/styles.css"></link>
+  <script type="type/javascript" src="./index.js"></script>
+  
+</footer>
 </html>

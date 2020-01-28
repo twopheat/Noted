@@ -1,37 +1,54 @@
-var notesHTML = require("./public/notes.html")
+
 var jquery = require("jquery");
 var express = require("express");
 
-var $noteTitle = $("#note-title");
+
+
+var $noteTitle = $(".note-title");
 var $noteText = $(".note-textarea");
 var $saveNoteBtn = $(".save-note");
 var $newNoteBtn = $(".new-note");
 var $noteList = $(".list-container .list-group");
 
 
+
 var app = express();
-//var PORT = 3000;
+
 
 //- Setup Express app
 app.use(express.urlencoded({ extended:true }));
 app.use(express.json());
-app.use(express.static('public'));
+//app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
+//function buildLaunch() {
+  var http = require("http");
 
+  var PORT = 3000;
+  
+  var server = http.createServer(handleRequest);
+  
+  // Start our server
+  server.listen(PORT, function() {
+    // Callback triggered when server is successfully listening. Hurray!
+    console.log("Visit http://localhost:" + PORT);
+  });
 
+  
 function fixJQ() {
     var deferred = $.Deferred();
 }
 
 // Routes
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../index.html"));
+  res.sendFile(path.join(__dirname, "./public/index.html"));
 });
 app.get("/note", function (req, res) {
-  res.sendFile(path.join(__dirname, "../notes.html"));
+  res.sendFile(path.join(__dirname, "./public/notes.html"));
 });
 app.get('/users/:userId/notes/:noteId', function (req, res) {
   res.send(req.params)
 });
+fixJQ();
 // activeNote is used to keep track of the note in the textarea
 var activeNote = {};
 
@@ -172,3 +189,4 @@ $noteText.on("keyup", handleRenderSaveBtn);
 
 // Gets and renders the initial list of notes
 getAndRenderNotes();
+
