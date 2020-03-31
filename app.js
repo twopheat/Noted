@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3002;
 let db = require('./db.json');
 let ids = db.map(post => post.id);
 const fs = require('fs');
+let myid = ids.length;
 
 //- Setup Express app
 app.use(express.urlencoded({ extended: true }));
@@ -25,24 +26,24 @@ app.get('/api/notes', function (req, res) {
 });
 
 app.delete('/api/notes/:id', function (req, res) {
-  const id = req.params.id;
-  db = db.filter(post => post.id !== id)
+  const id = parseInt(req.params.id);
+  db = db.filter(post => post.id !== id);
   fs.writeFile("./db.json", JSON.stringify(db), "utf8", err => {
-    if(err)throw(err);
+    if (err) throw (err);
   });
-  //res.redirect("/note");
+  res.redirect(303, "/note");
 });
 
 app.post('/api/notes', function (req, res) {
   var data = req.body;
-  var myid = 1;
-  while(ids.includes(myid)) {
+  while (ids.includes(myid)) {
     myid ++;
   }
   data.id = myid;
   db.push(data);
+  ids.push(myid);
   fs.writeFile("./db.json", JSON.stringify(db), "utf8", err => {
-    if(err)throw(err);
+    if (err) throw (err);
   });
   res.redirect("/note");
 });
