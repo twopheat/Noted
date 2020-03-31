@@ -7,9 +7,7 @@ html, body {
   .bg-dark {
     background-color:rgb(102, 101, 101)!important;
   }
-  .save-note {
-    display: none;
-  }
+
   
   .icons i {
     margin-left: 15px;
